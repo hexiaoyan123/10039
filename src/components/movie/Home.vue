@@ -60,7 +60,7 @@
         </div>
       </li>
     </ul>
-    <h3 v-show="(showType == 0 ? hotFilm : cominFilm).length == 0" class="noData">暂无数据！</h3>
+    <!-- <h3 v-show="(showType == 0 ? hotFilm : cominFilm).length == 0" class="noData">暂无数据！</h3> -->
     <h3 v-show="(showType == 0 ? hotFilm : cominFilm).length > 0" class="noData">
       <i class="keguan">
         <img src="../../assets/keguan.png" width="100%" />
@@ -121,6 +121,7 @@ export default {
       window.localStorage.setItem("clickCity", JSON.stringify(city));
       this.getCity(city);
     }
+    this.$store.commit("ctrlLoader", true);
     this.listHotFilm();
     this.listComingFilm();
   },
@@ -152,6 +153,7 @@ export default {
           if ("1000" == response.data.code) {
             if (response.data.result) {
               vm.hotFilm = response.data.result;
+              vm.$store.commit("ctrlLoader", false);
             } else {
               vm.hotFilm = [];
             }
@@ -173,6 +175,7 @@ export default {
           if ("1000" == response.data.code) {
             if (response.data.result) {
               vm.cominFilm = response.data.result;
+              vm.$store.commit("ctrlLoader", false);
             } else {
               vm.cominFilm = [];
             }

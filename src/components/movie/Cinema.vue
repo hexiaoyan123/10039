@@ -32,7 +32,7 @@
         <div class="cs-dist" v-if="val.distance">{{val.distance|distanceTo}}km</div>
       </div>
 
-      <h3 v-show="cinemaList.length == 0" class="noData">暂无数据！</h3>
+      <!-- <h3 v-show="cinemaList.length == 0" class="noData">暂无数据！</h3> -->
       <h3 v-show="cinemaList.length > 0" class="noData">
         <i class="keguan">
           <img src="../../assets/keguan.png" width="100%" />
@@ -98,6 +98,7 @@ export default {
     } else {
       this.city.show = true;
     }
+    this.$store.commit("ctrlLoader", true);
   },
   methods: {
     // 返回上一页
@@ -132,6 +133,7 @@ export default {
             // if (response.data.result) {
             vm.cinemaList = response.data.result;
             // }
+            vm.$store.commit("ctrlLoader", false);
           } else {
             vm.$toast(response.data.msg);
           }
