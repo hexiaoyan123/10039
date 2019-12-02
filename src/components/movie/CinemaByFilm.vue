@@ -134,10 +134,10 @@ export default {
     listFilmCinema() {
       let vm = this;
 
-      let longitude = vm.$store.state.position.lat
+      let latitude = vm.$store.state.position.lat
         ? vm.$store.state.position.lat
         : "";
-      let latitude = this.$store.state.position.lng
+      let longitude = this.$store.state.position.lng
         ? this.$store.state.position.lng
         : "";
 
