@@ -115,10 +115,10 @@ export default {
       this.getCity(city);
       //this.city.show = true;
     }
+    this.listCityCinema();
     window.localStorage.setItem("positionslng", this.$store.state.position.lng);
     window.localStorage.setItem("positionslat", this.$store.state.position.lat);
     this.$store.commit("ctrlLoader", true);
-    //this.listCityCinema();
   },
   methods: {
     // 返回上一页1
