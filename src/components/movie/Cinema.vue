@@ -23,13 +23,14 @@
       <div class="cs-item" v-for="val in cinemaList" :key="val.id" @click="clickCinema(val)">
         <h4>
           <div class="cs-item-name-left">
-            <span class="cs-item-dui">兑</span>
+            <!-- <span class="cs-item-dui">兑</span> -->
             <span class="cs-item-zuo">座</span>
           </div>
           <div class="cs-item-name-right">{{val.cinemaName}}</div>
         </h4>
         <p>{{val.areaName}}{{val.cinemaAddress}}</p>
-        <div class="cs-dist" v-if="val.distance">{{val.distance|distanceTo}}km</div>
+        <!-- <div class="cs-dist">0.3km</div> -->
+        <div class="cs-dist" v-if="val.distance">{{val.distance | distanceTo}}km</div>
       </div>
 
       <!-- <h3 v-show="cinemaList.length == 0" class="noData">暂无数据！</h3> -->
@@ -53,6 +54,11 @@
       <cinema-search @closeSearch="closeSMode" :v-city="city.city"></cinema-search>
     </div>
     <!-- 搜索筛选框结束 -->
+    <!-- 定位开始 -->
+    <div v-if="! $store.state.position.lng">
+      <v-map></v-map>
+    </div>
+    <!-- 定位结束 -->
 
     <go-top vlass="container"></go-top>
   </div>
@@ -62,12 +68,14 @@
 import MovieCity from "./City";
 import MovieCinemaSearch from "./CinemaSearch";
 import GoTop from "../GoTop";
+import vMap from "../Map";
 export default {
   name: "CityCinema",
   components: {
     "movie-city": MovieCity,
     "cinema-search": MovieCinemaSearch,
-    "go-top": GoTop
+    "go-top": GoTop,
+    "v-map": vMap
   },
   data() {
     let self = this;
@@ -96,12 +104,24 @@ export default {
       let data = JSON.parse(window.localStorage.getItem("clickCity"));
       this.getCity(data);
     } else {
-      this.city.show = true;
+      let city = {
+        id: "110100",
+        parentId: "110000",
+        grade: "2",
+        name: "北京",
+        abbr: "B"
+      };
+      window.localStorage.setItem("clickCity", JSON.stringify(city));
+      this.getCity(city);
+      //this.city.show = true;
     }
+    window.localStorage.setItem("positionslng", this.$store.state.position.lng);
+    window.localStorage.setItem("positionslat", this.$store.state.position.lat);
     this.$store.commit("ctrlLoader", true);
+    //this.listCityCinema();
   },
   methods: {
-    // 返回上一页
+    // 返回上一页1
     goBack() {
       this.$router.back(-1);
     },
@@ -112,13 +132,18 @@ export default {
 
       let latitude = vm.$store.state.position.lat
         ? vm.$store.state.position.lat
+        : vm.$store.state.position.lat
+        ? window.localStorage.getItem("positionslat")
         : "";
       let longitude = this.$store.state.position.lng
-        ? this.$store.state.position.lng
+        ? vm.$store.state.position.lng
+        : vm.$store.state.position.lng
+        ? window.localStorage.getItem("positionslng")
         : "";
 
-      //   let longitude = "116.38";
-      //   let latitude = "39.90";
+      alert(latitude);
+      // let longitude = "116.38";
+      // let latitude = "39.90";
       vm.$http
         .get(
           "/panda-cinema-api/v2/listCityCinema/" +
@@ -143,13 +168,12 @@ export default {
         });
     },
 
-    // 获取选中的地址
+    // 获取选中的地址1
     getCity(data) {
       this.city.city = data;
       this.$init.clickCity = data;
       window.localStorage.setItem("clickCity", JSON.stringify(data));
       this.city.show = false;
-
       this.listCityCinema();
     },
 
@@ -175,7 +199,7 @@ export default {
     }
   },
   filters: {
-    // 距离计算
+    // 距离计算1
     distanceTo(vlaue) {
       if (vlaue) {
         return (vlaue / 1000).toFixed(1);

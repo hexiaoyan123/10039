@@ -69,12 +69,39 @@
 
 <script>
 export default {
+  provide() {
+    return {
+      reload: this.reload
+    };
+  },
   data() {
-    return {};
+    return {
+      isRouterAlive: true
+    };
+  },
+  //监听器
+  watch: {
+    // 方法1
+    $route(to, from) {
+      //监听路由是否变化
+      // console.log(999)
+
+      if (to.path == "/movie/cinema") {
+        //跳转到哪个页面
+        location.reload();
+      }
+    }
   },
   methods: {
     goPath(path) {
       this.$router.push(path);
+    },
+    //监听页面实时刷新
+    reload() {
+      this.isRouterAlive = false;
+      this.$nextTick(function() {
+        this.isRouterAlive = true;
+      });
     }
   },
   computed: {

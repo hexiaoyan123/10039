@@ -42,7 +42,7 @@
       <div class="cs-item" v-for="val in value" :key="val.id" @click="clickCinema(val)">
         <h4>
           <div class="cs-item-name-left">
-            <span class="cs-item-dui">兑</span>
+            <!-- <span class="cs-item-dui">兑</span> -->
             <span class="cs-item-zuo">座</span>
           </div>
           <div class="cs-item-name-right">{{val.cinemaName}}</div>
@@ -140,10 +140,8 @@ export default {
       let longitude = this.$store.state.position.lng
         ? this.$store.state.position.lng
         : "";
-
       //   let longitude = "116.38";
       //   let latitude = "39.90";
-
       vm.$http
         .get(
           "/panda-cinema-api/v2/listFilmCinema/" +
