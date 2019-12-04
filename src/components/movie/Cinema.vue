@@ -115,13 +115,12 @@ export default {
       this.getCity(city);
       //this.city.show = true;
     }
-    this.listCityCinema();
-    window.localStorage.setItem("positionslng", this.$store.state.position.lng);
-    window.localStorage.setItem("positionslat", this.$store.state.position.lat);
+    //this.listCityCinema();
+
     this.$store.commit("ctrlLoader", true);
   },
   methods: {
-    // 返回上一页1
+    // 返回上一页
     goBack() {
       this.$router.back(-1);
     },
@@ -129,19 +128,27 @@ export default {
     // 根据城市获取影院
     listCityCinema() {
       let vm = this;
-
-      let latitude = vm.$store.state.position.lat
-        ? vm.$store.state.position.lat
+      // let latitude = vm.$store.state.position.lat
+      //   ? vm.$store.state.position.lat
+      //   : vm.$store.state.position.lat
+      //   ? window.localStorage.getItem("positionslat")
+      //   : "";
+      // let longitude = this.$store.state.position.lng
+      //   ? vm.$store.state.position.lng
+      //   : this.$store.state.position.lng
+      //   ? window.localStorage.getItem("positionslng")
+      //   : "";
+      let latitude = window.localStorage.getItem("positionslat")
+        ? window.localStorage.getItem("positionslat")
         : vm.$store.state.position.lat
         ? window.localStorage.getItem("positionslat")
         : "";
-      let longitude = this.$store.state.position.lng
-        ? vm.$store.state.position.lng
-        : vm.$store.state.position.lng
+      let longitude = window.localStorage.getItem("positionslng")
+        ? window.localStorage.getItem("positionslng")
+        : this.$store.state.position.lng
         ? window.localStorage.getItem("positionslng")
         : "";
-
-      alert(latitude);
+      //alert(longitude);
       // let longitude = "116.38";
       // let latitude = "39.90";
       vm.$http

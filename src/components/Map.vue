@@ -42,6 +42,14 @@ export default {
                   self.$nextTick();
                   // 把获取的数据提交到 store 的数据中，以便其他单文件组件使用
                   self.$store.commit("setPosition", self.positions);
+                  window.localStorage.setItem(
+                    "positionslng",
+                    self.positions.lng
+                  );
+                  window.localStorage.setItem(
+                    "positionslat",
+                    self.positions.lat
+                  );
                 }
               });
             }
