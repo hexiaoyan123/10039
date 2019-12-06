@@ -401,6 +401,64 @@ figure {
   background-position: 0 0;
   background-size: 100%;
 }
+/* 支付图标 */
+.iocn-weixin {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  background: url(./assets/payment/weixin.png) no-repeat;
+  background-position: 0 0;
+  background-size: 100%;
+}
+.iocn-zhifubao {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  background: url(./assets/payment/zhifubao.png) no-repeat;
+  background-position: 0 0;
+  background-size: 100%;
+}
+.iocn-yinlian {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  background: url(./assets/payment/yinlian.png) no-repeat;
+  background-position: 0 0;
+  background-size: 100%;
+}
+.iocn-xianjinka {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  background: url(./assets/payment/xianjinka.png) no-repeat;
+  background-position: 0 0;
+  background-size: 100%;
+}
+.iocn-xianjinjuan {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  background: url(./assets/payment/xianjinjuan.png) no-repeat;
+  background-position: 0 0;
+  background-size: 100%;
+}
+.iocn-dianjuan {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  background: url(./assets/payment/dianjuan.png) no-repeat;
+  background-position: 0 0;
+  background-size: 100%;
+}
+.iocn-cika {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  background: url(./assets/payment/cika.png) no-repeat;
+  background-position: 0 0;
+  background-size: 100%;
+}
+
 .van-overlay,
 .van-toast {
   animation: none !important;

@@ -11,16 +11,15 @@
         style="margin: 5px auto 30px; text-align: center; font-size: 3.2vw; color: #818181"
       >{{orderPay.orderId}} {{orderPay.businessName}}订单</div>
 
-      <!-- 选择支付方式 -->
-      <div class="ticket-cont">
+      <!-- 选择支付方式 item.name == 微信支付? iocn-weixin:1111 -->
+      <div class="ticket-cont ticket-cont_tit">
         <van-cell-group>
           <template v-for="item in payChannelList">
-            <van-cell
-              icon="debit-pay"
-              :title="item.name"
-              :key="item.id"
-              @click="selectedPayChannel = item"
-            >
+            <van-cell :title="item.name" :key="item.id" @click="selectedPayChannel = item">
+              <van-icon
+                :class="{'iocn-weixin': item.name == '微信支付','iocn-cika':item.name == '次卡支付','iocn-dianjuan':item.name == '点劵支付',
+                'iocn-xianjinjuan':item.name == '现金券支付','iocn-xianjinka':item.name == '现金卡支付','iocn-yinlian':item.name == '银联支付','iocn-zhifubao':item.name == '支付宝支付'}"
+              />
               <van-icon
                 slot="right-icon"
                 name="check"
@@ -385,7 +384,18 @@ header .iconfont {
 /* 票信息 */
 .ticket-cont {
   color: #ff446e;
-  padding: 20px 0;
+  padding: 20px 10px;
+}
+.ticket-cont_tit {
+  padding: 20px 15px;
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+.van-cell:not(:last-child):after {
+  border-bottom-width: 0px;
+}
+.van-hairline:after {
+  border: none;
 }
 .ticket-name {
   font-size: 48px;
@@ -572,6 +582,16 @@ header .iconfont {
 }
 .van-icon-debit-pay {
   color: #c06;
+}
+.van-cell__value {
+  overflow: none;
+  text-align: left;
+  vertical-align: middle;
+  position: absolute;
+  top: 14px;
+}
+.van-cell__title {
+  padding-left: 25px;
 }
 .van-cell__right-icon {
   font-size: 14px;
